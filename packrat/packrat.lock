@@ -1,9 +1,46 @@
 PackratFormat: 1.4
 PackratVersion: 0.4.6.1
-RVersion: 3.0.2
+RVersion: 3.1.2
 Repos: CRAN=http://cran.es.r-project.org/
+
+Package: XML
+Source: CRAN
+Version: 3.98-1.4
+Hash: 9f8bc34c3c3d2967c7d25f8945216ffa
+
+Package: chron
+Source: CRAN
+Version: 2.3-47
+Hash: d25d96d908cd21080f24c89eed4c80a0
+
+Package: data.table
+Source: CRAN
+Version: 1.9.6
+Hash: f92ef1f73afa43bf6fd69a22f3794abd
+Requires: chron
+
+Package: jsonlite
+Source: CRAN
+Version: 0.9.19
+Hash: 4a983f753b6e88ae0f5a6ac152d8cc32
 
 Package: packrat
 Source: CRAN
 Version: 0.4.6-1
 Hash: 29eacc43b096c5b1a82c8d54a49b030b
+
+Package: pipeR
+Source: CRAN
+Version: 0.6.0.6
+Hash: bd5b5a0251446135c9b9bc7ac73020ea
+
+Package: rlist
+Source: CRAN
+Version: 0.4.5.1
+Hash: 7f8972bfb3adc6221a13cbdd80ff766a
+Requires: XML, data.table, jsonlite, yaml
+
+Package: yaml
+Source: CRAN
+Version: 2.1.13
+Hash: 4854ccabebc225e8a7309fb4a74980de
