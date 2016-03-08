@@ -28,20 +28,22 @@ oauth_endpoints("github")
 #    Replace your key and secret below.
 myapp <- oauth_app("RepositoryInfoAnalysis",
                    key = "c9250479230abb9a683b",
-                   secret = "989e783ac469c5703dafe3db35c9fbe780ef1e86")
+                   secret = "089e1fed7f06fe76eae15bc879b4222eb40fd2d0")
 
 # 3. Get OAuth credentials
 github_token <- oauth2.0_token(oauth_endpoints("github"), myapp)
 
 # 4. Use API
 gtoken <- config(token = github_token)
-req <- GET("https://api.github.com/users/jiplaolm", gtoken)
+req <- GET("https://api.github.com/orgs/EHUGasteiz/members", gtoken)
 stop_for_status(req)
 content(req)
 
-# OR using Token:
 
-req <- GET("https://api.github.com/orgs/EHUGasteiz/members",
-           add_headers(Authorization="token 6b23a812a26088dfc79a586bc9a4842d13269abc"))
+
+## Tokenaren bidez informazioa lortu ahal izateko
+req <- GET("https://api.github.com/orgs/EHUGasteiz/members", 
+           add_headers(Authorization="token 38bf2ec902fe2e3f9b2461a207a7dfaa78a4961c"))
 stop_for_status(req)
 content(req)
+
