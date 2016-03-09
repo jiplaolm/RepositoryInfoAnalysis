@@ -1,5 +1,8 @@
+source("auth.R")
+
 library(rlist)
 library(pipeR)
+library(jsonlite)
 repos <- "https://api.github.com/users/jiplaolm/repos?per_page=100&page=%d" %>>%
   sprintf(1:2) %>>%
   list.load("json") %>>%
@@ -42,8 +45,14 @@ content(req)
 
 
 ## Tokenaren bidez informazioa lortu ahal izateko
+token <- paste("token", github_app_token)
 req <- GET("https://api.github.com/orgs/EHUGasteiz/members", 
-           add_headers(Authorization="token 38bf2ec902fe2e3f9b2461a207a7dfaa78a4961c"))
+           add_headers(Authorization= token))
+req
+str(req)
 stop_for_status(req)
-content(req)
+answer <- content(req)
+info <- fromJSON(content(req,"text"))
+info
+
 
