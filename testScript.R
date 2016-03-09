@@ -3,20 +3,20 @@ source("auth.R")
 library(rlist)
 library(pipeR)
 library(jsonlite)
-repos <- "https://api.github.com/users/jiplaolm/repos?per_page=100&page=%d" %>>%
-  sprintf(1:2) %>>%
-  list.load("json") %>>%
-  list.ungroup
-
-repos
-
-
-org <- "https://api.github.com/orgs/EHUGasteiz/members" %>>%
-  sprintf(1:2) %>>%
-  list.load("json") %>>%
-  list.ungroup
-
-org
+# repos <- "https://api.github.com/users/jiplaolm/repos?per_page=100&page=%d" %>>%
+#   sprintf(1:2) %>>%
+#   list.load("json") %>>%
+#   list.ungroup
+# 
+# repos
+# 
+# 
+# org <- "https://api.github.com/orgs/EHUGasteiz/members" %>>%
+#   sprintf(1:2) %>>%
+#   list.load("json") %>>%
+#   list.ungroup
+# 
+# org
 
 library(httr)
 
@@ -48,11 +48,35 @@ content(req)
 token <- paste("token", github_app_token)
 req <- GET("https://api.github.com/orgs/EHUGasteiz/members", 
            add_headers(Authorization= token))
-req
-str(req)
+
 stop_for_status(req)
 answer <- content(req)
 info <- fromJSON(content(req,"text"))
 info
 
 
+## Events
+event_req <- GET("https://api.github.com/users/jiplaolm/events", 
+                 add_headers(Authorization= token))
+stop_for_status(event_req)
+answer <- content(event_req, "text")
+event_info <- fromJSON(answer)
+head(event_info)
+
+## Commits
+event_req <- GET("https://api.github.com/repos/jiplaolm/RepositoryInfoAnalysis/commits?per_page=100", 
+                 add_headers(Authorization= token))
+stop_for_status(event_req)
+answer <- content(event_req, "text")
+event_info <- fromJSON(answer)
+head(event_info)
+# 
+# 
+# 
+# # Repository events
+# event_req <- GET("https://api.github.com/repos/jiplaolm/RepositoryInfoAnalysis/events", 
+#                  add_headers(Authorization= token))
+# stop_for_status(event_req)
+# answer <- content(event_req, "text")
+# event_info <- fromJSON(answer)
+# head(event_info)
